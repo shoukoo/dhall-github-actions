@@ -1,4 +1,4 @@
-{ matrix: Optional List { mapKey: Text, mapValue: Text }
-, fail-fast: Optional Bool
-, max-parallel: Optional Natrual
+{ matrix : Optional (List { mapKey : Text, mapValue : List Text })
+, fail-fast : Optional Bool
+, max-parallel : Optional Natural
 }

@@ -1,0 +1,2 @@
+{ Strategy = ./schema/Strategy.dhall
+}
