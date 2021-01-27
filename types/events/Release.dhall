@@ -1,2 +1,0 @@
-{ types: Optional (List Text)
-}
