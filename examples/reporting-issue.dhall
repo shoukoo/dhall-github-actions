@@ -1,8 +1,8 @@
 let GitHubAction =
-      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.1/api/package.dhall sha256:8a324e32d64c2b3ace0ded116d922b6858deb49f4f4d0903572a444664ab6ac5
+      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.1/api/package.dhall sha256:6b0b369c615de63aaf766f8d0374a19be401fd73f136fbf1a0e12b8f39fdc558
 
 in  GitHubAction.Workflow::{
-    , name = "test checkout"
+    , name = "Reporting issue"
     , on = GitHubAction.On::{ push = Some GitHubAction.OnPush::{=} }
     , jobs = toMap
         { build = GitHubAction.Jobs::{
@@ -12,8 +12,8 @@ in  GitHubAction.Workflow::{
             [ GitHubAction.ActionActionsCheckout::{=}
             , GitHubAction.ActionActionsCache.fn
                 { id = "cache"
-                , path = "jsonnet"
-                , key = "jsonnet"
+                , path = "cache"
+                , key = "cache"
                 , hashFiles = [ "key.file" ]
                 }
             , GitHubAction.ActionActionsGitHubScript.fn
