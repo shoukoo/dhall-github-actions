@@ -1,6 +1,5 @@
--- let GitHubAction =
---      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.1/api/package.dhall sha256:8a324e32d64c2b3ace0ded116d922b6858deb49f4f4d0903572a444664ab6ac5
-let GitHubAction = ../package.dhall
+let GitHubAction =
+      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.1/api/package.dhall sha256:8a324e32d64c2b3ace0ded116d922b6858deb49f4f4d0903572a444664ab6ac5
 
 in  GitHubAction.Workflow::{
     , name = "test checkout"
