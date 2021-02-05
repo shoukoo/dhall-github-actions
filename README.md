@@ -5,36 +5,46 @@ Typecheck, template and modularize your GitHub Actions definitions with Dhall
 
 ## Usage
 ```dhall
-let GitHubAction =
-      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.1/api/package.dhall sha256:6b0b369c615de63aaf766f8d0374a19be401fd73f136fbf1a0e12b8f39fdc558
+let GA =
+      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.2/package.dhall
 
-in  GitHubAction.Workflow::{
-    , name = "Reporting issue"
-    , on = GitHubAction.On::{ push = Some GitHubAction.OnPush::{=} }
+in  GA.Workflow::{
+    , name = "Test actions"
+    , on = GA.On::{ push = Some GA.OnPush::{ branches = Some [ "test" ] } }
     , jobs = toMap
-        { build = GitHubAction.Jobs::{
-          , name = Some "Reporting issue"
+        { build = GA.Jobs::{
+          , name = Some "test actions"
           , runs-on = [ "self-hosted" ]
           , steps =
-            [ GitHubAction.ActionActionsCheckout::{=}
-            , GitHubAction.ActionActionsCache.fn
-                { id = "cache"
-                , path = "cache"
-                , key = "cache"
-                , hashFiles = [ "key.file" ]
+            [ GA.Resource.Step GA.Step::{=}
+            , GA.Resource.ActionsCache
+                GA.actions/cache::{
+                , id = Some "action-cache"
+                , `with` = GA.actions/cache/with::{
+                  , path = "file.lock"
+                  , key = "file_lock"
+                  }
                 }
-            , GitHubAction.ActionActionsGitHubScript.fn
-                { id = "post-comment"
-                , name = "Post Comment"
-                , script =
-                    ''
-                    github.issues.createComment({
+            , GA.Resource.ActionsCheckout GA.actions/checkout::{=}
+            , GA.Resource.ActionsGitHubScript
+                GA.actions/github-script::{
+                , `with` = GA.actions/github-script/with::{
+                  , script =
+                      ''
+                      github.issues.createComment({
                       issue_number: context.issue.number,
                       owner: context.repo.owner,
                       repo: context.repo.repo,
-                      body: ' Thanks for reporting!'
-                    })
-                    ''
+                      body: '👋 Thanks for reporting!'
+                      })
+                      ''
+                  }
+                }
+            , GA.Resource.ActionsSetupGo
+                GA.actions/setup-go::{
+                , `with` = Some GA.actions/setup-go/with::{
+                  , go-version = Some "100"
+                  }
                 }
             ]
           }
