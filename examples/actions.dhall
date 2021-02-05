@@ -1,4 +1,5 @@
-let GA = ../package.dhall
+let GA =
+      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.2/package.dhall
 
 in  GA.Workflow::{
     , name = "Test actions"
