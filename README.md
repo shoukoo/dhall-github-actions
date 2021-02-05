@@ -55,8 +55,8 @@ in  GA.Workflow::{
 ## Development
 Please be sure to run `dhall format` against your change before creating a PR
 ### How to add a new action?
-1. The action must come from a verified GitHub account e.g AWS, Hashicorp..etc. This can ensure the action is safe to use.
-2. New action must inherit `steps.dhall` record type, this way the new action can get all the goodies. Here is an example:
+1. The action must come from a verified GitHub account i.e. AWS, Hashicorp..etc this is to ensure it is safe to use.
+2. New action must inherit steps.dhall record type, this way it can get all the optional fields. Here is an example:
 ```
 let Step = ./steps.dhall
 
