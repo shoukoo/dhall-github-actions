@@ -20,6 +20,8 @@ let Env
     : Type
     = List { mapKey : Text, mapValue : Text }
 
+let StepsUnion = ./stepsUnion.dhall
+
 in  { Type =
         { name : Optional Text
         , needs : Optional (List Text)
@@ -33,7 +35,7 @@ in  { Type =
         , continue-on-error : Optional Bool
         , services : Optional Service.Type
         , container : Optional Container.Type
-        , steps : List Step.Type
+        , steps : List StepsUnion
         }
     , default =
       { name = None Text
