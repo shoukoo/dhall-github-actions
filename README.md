@@ -6,7 +6,7 @@ Typecheck, template and modularize your GitHub Actions definitions with Dhall
 ## Usage
 ```dhall
 let GA =
-      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.2/package.dhall
+      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.4/package.dhall
 
 in  GA.Workflow::{
     , name = "Test actions"
@@ -52,11 +52,18 @@ in  GA.Workflow::{
     }
 ```
 
+## List of supported actions
+- [actions/cache](https://github.com/actions/cache)
+- [actions/checkout](https://github.com/actions/checkout)
+- [actions/github-script](https://github.com/actions/github-script)
+- [actions/setup-go](https://github.com/actions/setup-go)
+- [actions/setup-node](https://github.com/actions/setup-node)
+
 ## Development
 Please be sure to run `dhall format` against your change before creating a PR
 ### How to add a new action?
-1. The action must come from a verified GitHub account i.e. AWS, Hashicorp..etc this is to ensure it is safe to use.
-2. New action must inherit steps.dhall record type, this way it can get all the optional fields. Here is an example:
+1. The action must come from a verified GitHub account e.g. AWS, Hashicorp..etc. This is to ensure they're safe to consume.
+2. New action must inherits steps.dhall record type, this way it can get all the optional fields. Here is an example:
 ```
 let Step = ./steps.dhall
 
@@ -66,6 +73,5 @@ in  { Type = Step.Type ⩓ { `with` : With.Type }
     , default = Step.default ⫽ { uses = Some "actions/github-script@v3" }
     }
 ```
-3. New action file must follow this naming convention: `actions.<account name>.<action name>`
-4. New record type must be added to `api/package.dhall`, and also use this format for the `key`: `actions/checkout`
-5. Add your new action in `api/stepUnion.dhall`
+3. New action file must follow this naming convention: `actions.<account name>.<action name>`.
+5. Add your new action in both `api/stepUnion.dhall` and `api/package.dhall`

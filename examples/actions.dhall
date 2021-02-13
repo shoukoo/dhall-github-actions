@@ -1,6 +1,6 @@
--- let GA =
---      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.2/package.dhall
-let GA = ../package.dhall
+-- let GA = ../package.dhall
+let GA =
+      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.4/package.dhall sha256:0731bffe063de480797852c7bd408eddd5463665e28bec8217f4c63c52f12c37
 
 in  GA.Workflow::{
     , name = "Test actions"
