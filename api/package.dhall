@@ -7,6 +7,8 @@
   , actions/github-script/with = ./action.actions.github-script.with.dhall
   , actions/setup-go = ./action.actions.setup-go.dhall
   , actions/setup-go/with = ./action.actions.setup-go.with.dhall
+  , actions/setup-node = ./action.actions.setup-node.dhall
+  , actions/setup-node/with = ./action.actions.setup-node.with.dhall
   , Defaults = ./defaults.dhall
   , Jobs = ./jobs.dhall
   , JobsContainer = ./jobs.container.dhall

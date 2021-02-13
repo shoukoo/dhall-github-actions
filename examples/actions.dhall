@@ -1,5 +1,6 @@
-let GA =
-      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.2/package.dhall
+-- let GA =
+--      https://raw.githubusercontent.com/shoukoo/dhall-github-actions/v0.0.2/package.dhall
+let GA = ../package.dhall
 
 in  GA.Workflow::{
     , name = "Test actions"
@@ -19,6 +20,7 @@ in  GA.Workflow::{
                   }
                 }
             , GA.Resource.ActionsCheckout GA.actions/checkout::{=}
+            , GA.Resource.ActionsSetupNode GA.actions/setup-node::{=}
             , GA.Resource.ActionsGitHubScript
                 GA.actions/github-script::{
                 , `with` = GA.actions/github-script/with::{
